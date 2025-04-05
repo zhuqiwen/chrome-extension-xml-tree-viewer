@@ -23,3 +23,7 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 5. Load the unpacked extension by selecting the folder containing the extension files.
 
 ## Screenshots
+### Light mode
+![Light mode](https://github.iu.edu/qiwzhu/chrome-extension-xml-tree-viewer/assets/7533/a384e149-7861-4f3b-aabf-ec4ebf64340e)
+### Dark mode
+![Dark mode](https://github.iu.edu/qiwzhu/chrome-extension-xml-tree-viewer/assets/7533/28066c70-d305-476f-84dd-9000b00963b2)
