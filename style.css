@@ -100,3 +100,14 @@ body.dark-mode #xml-tree-container button {
 #xml-tree-container button:hover {
     background-color: #666;
 }
+
+
+/*
+highlight xpath search result
+ */
+
+#xml-tree-container .xpath-highlight {
+    background-color: #ffffa0;
+    border-radius: 4px;
+    padding: 1px 2px;
+}

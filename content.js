@@ -10,6 +10,23 @@ if(document.contentType === "text/xml" || document.contentType === "application/
     attachedRenderedXmlToHtmlDoc(xmlElement, newHtmlDoc);
     // replace the original xml doc with rendered html doc
     document.replaceChild(newHtmlDoc.documentElement, document.documentElement);
+
+    //search by xpath
+    const input = document.getElementById("xpath-input");
+    input.addEventListener("input", () => {
+        console.log("input", input.value);
+        const xpath = input.value.trim();
+        if (!xpath) {
+            clearHighlights();
+            return;
+        }
+
+        if (isValidXPath(xpath, xmlElement)) {
+            highlightXPathMatches(xpath, xmlElement);
+        } else {
+            clearHighlights();
+        }
+    });
 }
 
 
@@ -23,7 +40,15 @@ function renderXMLTree(xmlNode) {
         return msg;
     }
 
-    let html = "<li>";
+    // Initialize a static counter on the function
+    if (typeof renderXMLTree.nodeIdCounter === 'undefined') {
+        renderXMLTree.nodeIdCounter = 0;
+    }
+    // Assign a unique ID to the XML node
+    const nodeId = renderXMLTree.nodeIdCounter++;
+    xmlNode.__node_id = nodeId;
+
+    let html = "<li data-xml-node-id='" + nodeId + "'>";
 
     // Check if the node is an ELEMENT node (e.g., <tag>)
     if (xmlNode.nodeType === Node.ELEMENT_NODE) {
@@ -83,6 +108,7 @@ function attachedRenderedXmlToHtmlDoc(xmlDocument, htmlDoc) {
 
     addDarkModeButton(htmlDoc, container);
     addFoldUnfoldButton(htmlDoc, container);
+    addXPathInput(htmlDoc, container);
 
 
     // Add event listener to all toggle buttons
@@ -144,6 +170,68 @@ function addFoldUnfoldButton(htmlDoc, container) {
     });
 }
 
+function addXPathInput(htmlDoc, container) {
+    const input = htmlDoc.createElement("input");
+    input.type = "text";
+    input.placeholder = "Enter XPath...";
+    input.id = "xpath-input";
+    input.style.cssText = `
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 8px;
+    font-size: 14px;
+  `;
+
+    container.prepend(input);
+}
 
 
 
+
+function isValidXPath(xpath, contextNode) {
+
+    try {
+        document.evaluate(xpath, contextNode, null, XPathResult.ANY_TYPE, null);
+        console.log('valid')
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+function clearHighlights() {
+    document.querySelectorAll('.xpath-highlight').forEach(el => {
+        el.classList.remove('xpath-highlight');
+    });
+}
+
+function highlightXPathMatches(xpath, contextNode) {
+    clearHighlights();
+    try {
+        const result = document.evaluate(
+            xpath,
+            contextNode,
+            null,
+            XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+            null
+        );
+
+        console.log(result);
+
+        for (let i = 0; i < result.snapshotLength; i++) {
+            const node = result.snapshotItem(i);
+            console.log(node);
+
+            if (node.nodeType === Node.ELEMENT_NODE) {
+                console.log(node);
+                console.log(node.__node_id);
+                const renderedNode = document.querySelector(`[data-xml-node-id="${node.__node_id}"]`);
+                if (renderedNode) {
+                    renderedNode.classList.add('xpath-highlight');
+                }
+            }
+        }
+    } catch (e) {
+        // Invalid XPath, do nothing or log error
+    }
+}
