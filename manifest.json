@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "XML Tree Viewer",
   "version": "1.0",
-  "description": "Formats and displays XML in a tree structure, including iframes",
+  "description": "Formats and displays XML,  including XML embedded in iframes in a tree structure by Qiwen Zhu",
   "permissions": ["activeTab"],
   "host_permissions": ["<all_urls>"],
   "content_scripts": [
