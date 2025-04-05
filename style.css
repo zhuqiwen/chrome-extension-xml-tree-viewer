@@ -1,0 +1,102 @@
+/*!* Base styles for both modes *!*/
+body, html {
+    /*margin: 0;*/
+    /*padding: 0;*/
+    font-family: "Fira Code", monospace;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#xml-tree-container {
+    padding: 2em;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* Tree structure */
+#xml-tree-container ul {
+    list-style-type: none;
+    padding-left: 1.5em;
+    margin: 0;
+}
+
+#xml-tree-container ul.collapsed {
+    display: none;
+}
+
+/* Syntax coloring */
+#xml-tree-container .node-tag {
+    font-weight: bold;
+}
+
+#xml-tree-container .text-content {
+    font-style: italic;
+    word-break: break-word;
+}
+
+#xml-tree-container .toggle {
+    cursor: pointer;
+    user-select: none;
+    margin-right: 5px;
+    color: inherit;
+}
+
+/* Light mode */
+body:not(.dark-mode) #xml-tree-container {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+body:not(.dark-mode) #xml-tree-container .node-tag {
+    color: #0074d9;
+}
+
+body:not(.dark-mode) #xml-tree-container .text-content {
+    color: #1e1e1e;
+}
+
+body:not(.dark-mode) #xml-tree-container .toggle {
+    color: #b10dc9;
+}
+
+/* Dark mode */
+body.dark-mode #xml-tree-container{
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+}
+
+body.dark-mode #xml-tree-container .node-tag {
+    color: #569cd6;
+}
+
+body.dark-mode #xml-tree-container .text-content {
+    color: #dcdcaa;
+}
+
+body.dark-mode #xml-tree-container .toggle {
+    color: #c586c0;
+}
+
+/* Toggle button style */
+#xml-tree-container button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+    padding: 8px 12px;
+    background-color: #888;
+    border: none;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode #xml-tree-container button {
+    background-color: #444;
+}
+
+#xml-tree-container button:hover {
+    background-color: #666;
+}

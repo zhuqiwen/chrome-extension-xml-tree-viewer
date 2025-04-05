@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "XML Tree Viewer",
+  "version": "1.0",
+  "description": "Formats and displays XML in a tree structure, including iframes",
+  "permissions": ["activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["style.css"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}
