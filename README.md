@@ -1,8 +1,8 @@
 # XML Tree Viewer
 
 ## Description
-
-This Chrome extension allows users to view XML in place in a tree structure, including XML embedded in iframes.
+The [XML Tree](https://chromewebstore.google.com/detail/xml-tree/gbammbheopgpmaagmckhpjbfgdfkpadb?hl=en) extension I've been using becomes unavailable recently.
+So I put together a similar one which allows users to view XML in place in a tree structure, including XML embedded in iframes.
 
 ## Author
 
