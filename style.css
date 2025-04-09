@@ -29,6 +29,14 @@ body, html {
     font-weight: bold;
 }
 
+#xml-tree-container .node-attributes {
+    font-style: italic;          /* Make it italic */
+    background-color: #fff3cd;   /* Soft yellow highlight */
+    padding: 0 4px;              /* Add horizontal padding */
+    border-radius: 4px;          /* Rounded corners */
+    color: #856404;              /* Optional: make text stand out */
+}
+
 #xml-tree-container .text-content {
     font-style: italic;
     word-break: break-word;

@@ -56,13 +56,19 @@ function renderXMLTree(xmlNode) {
         let hasText = xmlNode.textContent.trim().length > 0;
         let isEmpty = !hasChildren && !hasText;
 
+        console.log(xmlNode.attributes);
+        let attributesString = attributesToString(xmlNode.attributes);
         let toggleSymbol = hasChildren ? `<span class="toggle">+</span>` : "";
-        let openingTag = `<span class="node-tag">&lt;${xmlNode.nodeName}&gt;</span>`;
+        let openingTagWithAttributes = `<span class="node-tag">&lt;${xmlNode.nodeName} <span class="node-attributes">${attributesString}</span>&gt;</span>`;
+        let openingTagNoAttributes = `<span class="node-tag">&lt;${xmlNode.nodeName}&gt;</span>`;
+        let openingTag = attributesString.trim() === "" ? openingTagNoAttributes : openingTagWithAttributes;
         let closingTag = `<span class="node-tag">&lt;/${xmlNode.nodeName}&gt;</span>`;
 
         if (isEmpty) {
             // Self-closing tag for empty nodes
-            html += `${toggleSymbol} <span class="node-tag">&lt;${xmlNode.nodeName} /&gt;</span>`;
+            let withAttributes= `${toggleSymbol} <span class="node-tag">&lt;${xmlNode.nodeName} <span class="node-attributes">${attributesString}</span>/&gt;</span>`;
+            let noAttributes = `${toggleSymbol} <span class="node-tag">&lt;${xmlNode.nodeName}/&gt;</span>`;
+            html += attributesString.trim() === "" ? noAttributes : withAttributes;
         } else {
             // Standard open tag
             html += `${toggleSymbol} ${openingTag}`;
@@ -234,4 +240,15 @@ function highlightXPathMatches(xpath, contextNode) {
     } catch (e) {
         // Invalid XPath, do nothing or log error
     }
+}
+
+function attributesToString(attributes) {
+    if (!attributes || attributes.length === 0) return "";
+
+    let result = [];
+    for (let i = 0; i < attributes.length; i++) {
+        const attr = attributes[i];
+        result.push(`${attr.name}="${attr.value}"`);
+    }
+    return result.join(" ");
 }
