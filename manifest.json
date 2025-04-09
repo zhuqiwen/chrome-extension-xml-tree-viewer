@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "XML Tree Viewer",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Formats and displays XML,  including XML embedded in iframes in a tree structure by Qiwen Zhu",
   "icons": {
     "128": "icons/icon-128.png"
