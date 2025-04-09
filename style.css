@@ -49,6 +49,12 @@
     color: inherit;
 }
 
+#xml-tree-container .comment {
+    color: #888;
+    font-style: italic;
+    margin-left: 1em;
+}
+
 /* Light mode */
 body:not(.dark-mode) #xml-tree-container {
     background-color: #ffffff;

@@ -1,4 +1,3 @@
-
 if(document.contentType === "text/xml" || document.contentType === "application/xml"){
     // !== window.top means it's an iframe, so the xmlElement is simply the document.documentElement
     // otherwise, it means the xml is opened in the top window (not an iframe), and chrome hides raw xml in the div with id=webkit-xml-viewer-source-xml
@@ -94,6 +93,10 @@ function renderXMLTree(xmlNode) {
         if (text.length > 0) {
             html += `<span class="text-content xyz">${text}</span>`;
         }
+    }
+    else if (xmlNode.nodeType === Node.COMMENT_NODE) {
+        let commentText = xmlNode.nodeValue.trim();
+        html += `<span class="comment">&lt;!-- ${commentText} --&gt;</span>`;
     }
 
     html += "</li>";
