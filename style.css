@@ -1,5 +1,5 @@
 /*!* Base styles for both modes *!*/
-body, html {
+#xml-tree-container body, html {
     /*margin: 0;*/
     /*padding: 0;*/
     font-family: "Fira Code", monospace;
